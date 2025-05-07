@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Tagesschrift&display=swap');
+/* "Tagesschrift", system-ui; */
+
+body {
+      background: #000;
+      font-family: "Roboto", sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+      box-shadow: 0 0 0px 1000px transparent inset !important;
+      -webkit-text-fill-color: white !important;
+      transition: background-color 5000s ease-in-out 0s;
+}
+
+input[type="number"] {
+      -moz-appearance: textfield;
+      /* Firefox */
+      -webkit-appearance: none;
+      /* Chrome, Safari */
+      appearance: none;
+      /* Standard */
+}
+
+/* Safari uchun maxsus qo'shimcha uslub */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}

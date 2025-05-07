@@ -1,0 +1,37 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "X clone ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muhammad-amin7/X.git"
+  },
+  "keywords": [
+    "x",
+    "clone"
+  ],
+  "author": "Abduhalilov Muhammad Amin Abduxalilov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Muhammad-amin7/X/issues"
+  },
+  "homepage": "https://github.com/Muhammad-amin7/X#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.1",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
