@@ -23,10 +23,10 @@ passport.use(new GitHubStrategy({
       callbackURL: 'http://localhost:3000/user/auth/github/callback',
 }, async (accessToken, refreshToken, profile, done) => {
       try {
+            console.log(profile);
             done(null, profile);
       } catch (err) {
-            done(err, null);
             console.log(err);
-
+            done(err, null);
       }
 }));

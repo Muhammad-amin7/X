@@ -1,5 +1,5 @@
-import users from "../schema/users.js";
-import { createToken } from "../utils/createJsonWebTokken.js";
+import users from "../../schema/users.js";
+import { createToken } from "../../utils/createJsonWebTokken.js";
 
 export const authgooglecallback = async (req, res) => {
       const email = req.user?.emails?.[1]?.value || req.user?.emails?.[0]?.value;
@@ -10,9 +10,9 @@ export const authgooglecallback = async (req, res) => {
 
       try {
             const isExisting = await users.findOne({ email });
-            const token = createToken({ email });
 
             if (isExisting) {
+                  const token = createToken({ id: isExisting._id });
                   return res.redirect(`http://localhost:5173/?token=${token}`);
             } else {
                   const newuser = new users({
@@ -22,6 +22,7 @@ export const authgooglecallback = async (req, res) => {
                         joined_time: new Date(),
                         provide: "google"
                   });
+                  const token = createToken({ id: newuser._id });
 
                   await newuser.save();
                   return res.redirect(`http://localhost:5173/?token=${token}`);

@@ -1,9 +1,12 @@
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import React, { useState } from 'react';
 
-export default function Input({ placeholder, name, min, max, type = 'text', className }) {
+export default function Input({ placeholder, name, min, max, type = 'text', className, getValue }) {
       const [focusing, setFocusing] = useState(false);
       const [value, setValue] = useState('');
       const [error, setError] = useState(false);
+      const [showPassword, setShowPassword] = useState(false)
       const isActive = focusing || value.length > 0;
 
       const handleCheckValue = (e) => {
@@ -32,25 +35,27 @@ export default function Input({ placeholder, name, min, max, type = 'text', clas
 
       return (
             <div
-                  className={`w-full h-17 py-2 px-3 grid grid-cols-1 rounded-lg border duration-300 cursor-text overflow-hidden my-4 ${isActive ? 'border-blue-700' : 'border-gray-700'}
+                  className={`w-full h-17 py-2 px-3 grid grid-cols-1 rounded-lg border duration-300 cursor-text overflow-hidden my-4 relative ${isActive ? 'border-blue-700' : 'border-gray-700'}
                         } ${error && 'border-red-700!'} ${className}`}
             >
                   <label
                         htmlFor={`${placeholder}-${name}`}
-                        className={`${isActive ? 'text-blue-700 text-sm' : 'text-gray-700 text-xl pt-2'} ${error && 'text-red-700!'} cursor-text capitalize font-light duration-300`}
+                        className={`${isActive ? 'text-blue-700 text-sm' : 'text-gray-700 text-xl pt-2'} ${error && 'text-red-700!'} cursor-text capitalize font-light duration-300 `}
                   >
                         {placeholder}
                   </label>
+                  <button className={`absolute top-1/2 -translate-y-1/2 right-6 cursor-pointer text-2xl ${showPassword ? "text-blue-500" : 'text-white'}`} onClick={(e) => { setShowPassword(prev => !prev); e.preventDefault() }}>{type === 'password' && (showPassword ? <FaEye /> : <FaEyeSlash />)}</button>
                   <input
                         id={`${placeholder}-${name}`}
                         name={name}
-                        type={type}
+                        type={type === 'password' ? (showPassword ? "text" : "password") : type}
                         value={value}
                         onFocus={() => setFocusing(true)}
                         onBlur={() => setFocusing(false)}
                         onChange={(e) => {
                               setValue(e.target.value);
                               handleCheckValue(e);
+                              getValue && getValue(e.target.value)
                         }}
                         className={`outline-0 ${name !== "email" && 'capitalize'}`}
                         aria-valuemin={min}

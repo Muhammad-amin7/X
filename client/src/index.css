@@ -32,3 +32,17 @@ input[type="number"]::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
 }
+
+.btn_loader {
+      animation: loader 900ms linear infinite;
+}
+
+@keyframes loader {
+      from {
+            transform: rotate(0deg);
+      }
+
+      to {
+            transform: rotate(360deg);
+      }
+}
