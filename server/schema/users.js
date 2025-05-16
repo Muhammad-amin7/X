@@ -8,7 +8,9 @@ const USERS = mongoose.Schema({
       photo: { type: String },
       joined_time: { type: Date, required: true, default: Date.now },
       provide: { type: String, default: 'email' },
-      brithday: { type: Date }
+      brithday: { type: Date },
+      github_id: { type: String },
+      photo_background: { type: String }
 })
 
 export default mongoose.models["users"] || mongoose.model("users", USERS)

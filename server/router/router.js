@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { siginCheckEmail } from '../controllers/register by email/checkEmail.js';
-import { siginUser } from '../controllers/register by email/saveUser.js';
-import { siginSaveInfo } from '../controllers/register by email/saveInfos.js';
-import { authgooglecallback } from '../controllers/Auth by Social/authgooglecallback.js';
-import { existingEmail } from '../controllers/register by email/existingEmail.js';
-import { checkLoginEmail } from '../controllers/Login by email/existingEmail.js';
-import { checkLoginPass } from '../controllers/Login by email/checkPass.js';
+import { checkPassword, isValidEmail } from '../controllers/Auth/Login/Login.js';
+import { checkCode, sendCode, setPassword } from '../controllers/Auth/Login/Reset Password.js';
+import { initialData, saveUser, verifyEmail } from '../controllers/Auth/Register/register.js';
+import { authGoogle } from '../controllers/Auth/Social/Google.js';
+import { authGithub } from '../controllers/Auth/Social/Github.js';
+import { authuser } from '../middlewares/authUser.mid.js';
+import { Profile } from '../controllers/Get informations/Profile.js';
+import { createPost } from '../controllers/Posts/createPost.js';
 
 const router = Router();
 
@@ -14,24 +15,37 @@ const router = Router();
 router.get('/user/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
 router.get('/user/auth/google/callback',
       passport.authenticate('google', { failureRedirect: '/', session: false }),
-      authgooglecallback
+      authGoogle
 );
 
 // enter with github
 router.get('/user/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
 router.get('/user/auth/github/callback',
       passport.authenticate('github', { failureRedirect: '/', session: false }),
-      authgooglecallback
+      authGithub
 );
 
 // sigin with email
-router.post('/user/auth/sigin', siginSaveInfo);
-router.post('/user/auth/sigin/code', siginCheckEmail)
-router.post('/user/auth/sigin/password', siginUser)
-router.post('/user/auth/check/email', existingEmail)
+router.post('/user/auth/sigin', initialData);
+router.post('/user/auth/sigin/code', verifyEmail)
+router.post('/user/auth/sigin/password', saveUser)
+router.post('/user/auth/check/email', isValidEmail)
 
 // login with email
-router.post('/user/auth/login', checkLoginEmail)
-router.post('/user/auth/login/password', checkLoginPass)
+router.post('/user/auth/login', isValidEmail)
+router.post('/user/auth/login/password', checkPassword)
+
+// resert password 
+router.get('/user/reset/:email', sendCode)
+router.post('/user/reset/check', checkCode)
+router.post('/user/reset/password', setPassword)
+
+// get profile
+router.get('/profile/show/:id', authuser, Profile)
+
+// post 
+router.post('/posts', authuser, createPost)
+
+
 
 export default router;

@@ -8,6 +8,7 @@ export default function SaveToken() {
       useEffect(() => {
             const searchParams = new URLSearchParams(location.search);
             const token = searchParams.get("token");
+            alert(token)
             if (token) {
                   localStorage.setItem("token", token);
                   navigate("/home")

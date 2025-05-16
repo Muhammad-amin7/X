@@ -57,6 +57,22 @@ class userServices {
       async loginPassword(data) {
             return this.request(`${this.baseUrl}/user/auth/login/password`, "POST", data)
       }
+
+      async resetPassword(email) {
+            return this.request(`${this.baseUrl}/user/reset/${email}`, "GET")
+      }
+
+      async resetCode(data) {
+            return this.request(`${this.baseUrl}/user/reset/check`, "POST", data)
+      }
+
+      async newPassword(data) {
+            return this.request(`${this.baseUrl}/user/reset/password`, "POST", data)
+      }
+
+      async usersProfile(id) {
+            return this.request(`${this.baseUrl}/profile/show/${id}`, "GET")
+      }
 }
 
 

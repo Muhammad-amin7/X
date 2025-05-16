@@ -15,7 +15,7 @@ export default function NavBar() {
       ]
 
       return (
-            <aside className='border-r-1 border-[rgba(180,180,180,0.5)] h-screen w-1/5 py-5 pr-10'>
+            <aside className='border-r-1 border-[rgba(180,180,180,0.5)] h-screen py-5 pr-10'>
                   <Link to={"/home"}>
                         <Logo className="w-12! h-12!" />
                   </Link>

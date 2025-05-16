@@ -12,7 +12,8 @@ export const authuser = async (req, res, next) => {
             const token = authHeader.split(" ")[1];
 
             const decoded = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
-            const thisUser = await users.findOne({ email: decoded.email });
+            
+            const thisUser = await users.findById(decoded.id);
 
             if (!thisUser) {
                   return res.status(401).send({ ok: false, status: 401, message: "User not found" });

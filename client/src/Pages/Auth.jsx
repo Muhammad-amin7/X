@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import React, { useContext } from 'react';
 import Button from "../layouts/Button";
 import Logo from "../layouts/Logo";
-import AuthFormModal from "../Components/AuthFormModal";
+import AuthFormModal from "../Components/Auth/AuthFormModal";
 import { Context } from "../Context/Context";
 
 export default function Auth() {
@@ -19,7 +19,7 @@ export default function Auth() {
 
       return (
             <section className='w-screen min-h-screen flex items-center justify-center max-lg:py-10'>
-                  <div className='w-4/5 lg:w-[70vw] 2xl:w-[80vw] m-auto lg:flex items-center justify-between h-full'>
+                  <div className='w-4/5 lg:w-[70vw] 2xl:w-[80vw] m-auto lg:flex items-center justify-between min-h-full'>
                         <Logo className='w-10 lg:w-[30vw]' />
 
                         <div className="text-white">

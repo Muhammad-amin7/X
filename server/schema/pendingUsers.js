@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const pendingusers = mongoose.Schema({
-      name: { type: String, required: true },
+      name: { type: String },
       email: { type: String, unique: true },
       provide: { type: String, default: 'email' },
       code: { type: Number },
