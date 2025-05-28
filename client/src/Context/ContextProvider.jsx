@@ -4,9 +4,10 @@ import { useUsersProfile } from '../Hooks/useUsersProfile'
 
 export default function ContextProvider({ children }) {
       const [openThisModal, setOpenThisModal] = useState(null)
-      const { data, sendId } = useUsersProfile()
       const [UserInfos, setUserInfos] = useState({})
+      const [Contents, setContents] = useState([])
 
+      const { data, sendId } = useUsersProfile()
       useEffect(() => {
             sendId()
       }, [])
@@ -19,7 +20,7 @@ export default function ContextProvider({ children }) {
 
 
       return (
-            <Context.Provider value={{ openThisModal, setOpenThisModal, UserInfos, setUserInfos }}>
+            <Context.Provider value={{ openThisModal, setOpenThisModal, UserInfos, setUserInfos, Contents, setContents }}>
                   {children}
             </Context.Provider>
       )

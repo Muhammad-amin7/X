@@ -7,13 +7,11 @@ import { createToken } from "../../../utils/createJsonWebTokken.js"
 
 export const sendCode = async (req, res) => {
       const { email } = req.params;
-      console.log(email);
 
 
       try {
             const code = codeVerification();
             await sendCodeToEmail(email, code);
-            console.log(email);
 
 
             await pendingUsers.updateOne(

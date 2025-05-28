@@ -16,7 +16,7 @@ export default function ProfileImages({ info }) {
                               {
                                     info?.photo ?
                                           <img src={info.photo} alt="" className='w-full h-full block' /> :
-                                          <p>{info?.name.split("")[0]}</p>
+                                          <p>{info?.name?.split("")[0]}</p>
                               }
                         </div>
                   </div>

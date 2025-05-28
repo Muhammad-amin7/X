@@ -9,7 +9,6 @@ export const initialData = async (req, res) => {
       try {
             const { email, name, day, month, year } = req.body;
             const brithday = new Date(year, Number(month) - 1, day)
-            console.log(brithday);
 
 
             if (!email || !name) {
@@ -59,7 +58,6 @@ export const isUsedEmail = async (req, res) => {
 
 export const verifyEmail = async (req, res) => {
       const { code, email } = req.body
-      console.log(code, email);
 
       try {
 
@@ -104,7 +102,6 @@ export const saveUser = async (req, res) => {
                   return res.status(404).json({ message: "Foydalanuvchi topilmadi." });
             }
 
-            console.log(otherDetails);
 
             const savedUser = await new users({
                   name: otherDetails.name,

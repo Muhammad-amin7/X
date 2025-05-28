@@ -3,7 +3,6 @@ import { createToken } from "../../../utils/createJsonWebTokken.js";
 
 export const authGoogle = async (req, res) => {
       const email = req.user?.emails?.[1]?.value || req.user?.emails?.[0]?.value;
-      console.log(email);
 
       try {
             const isExisting = await users.findOne({ email: email, provide: "google" });

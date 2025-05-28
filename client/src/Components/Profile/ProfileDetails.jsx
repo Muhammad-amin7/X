@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FaArrowLeft } from 'react-icons/fa6'
 import ProfileNames from './ProfileNames'
 import ProfileImages from './ProfileImages'
@@ -9,7 +9,7 @@ import { Context } from '../../Context/Context'
 export default function ProfileDetails() {
       const { UserInfos } = useContext(Context)
       const navigate = useNavigate()
-
+      useEffect(() => { console.log(UserInfos) }, [UserInfos])
 
 
       return (
@@ -27,8 +27,8 @@ export default function ProfileDetails() {
                         </nav>
 
 
-                        <ProfileImages info={UserInfos.info} />
-                        <ProfileNames info={UserInfos.info} />
+                        <ProfileImages info={UserInfos} />
+                        <ProfileNames info={UserInfos} />
                   </section>
             </div>
       )

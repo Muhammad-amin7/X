@@ -8,6 +8,13 @@ import { authGithub } from '../controllers/Auth/Social/Github.js';
 import { authuser } from '../middlewares/authUser.mid.js';
 import { Profile } from '../controllers/Get informations/Profile.js';
 import { createPost } from '../controllers/Posts/createPost.js';
+import multer from "multer";
+import { PostsForYou } from '../controllers/Posts/PostsForYou.js';
+import { AddLike } from '../controllers/Posts/Like.js';
+import { addComment } from '../controllers/Posts/addComment.js';
+import { allComments } from '../controllers/Posts/allComments.js';
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 const router = Router();
 
@@ -44,8 +51,11 @@ router.post('/user/reset/password', setPassword)
 router.get('/profile/show/:id', authuser, Profile)
 
 // post 
-router.post('/posts', authuser, createPost)
-
+router.post('/posts', upload.single("image"), authuser, createPost)
+router.get('/posts/all/:limit', authuser, PostsForYou)
+router.get('/posts/like/:id', authuser, AddLike)
+router.post('/posts/comment', authuser, addComment)
+router.get('/posts/comment/:id/:limit', authuser, allComments)
 
 
 export default router;

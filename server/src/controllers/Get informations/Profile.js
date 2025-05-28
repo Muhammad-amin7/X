@@ -5,7 +5,6 @@ export const Profile = async (req, res) => {
       const ownerId = req.user?.id;
 
       try {
-            console.log(ownerId);
 
             if (!userId) {
                   return res.status(400).send({ status: 400, message: "Bad request" });

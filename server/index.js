@@ -2,9 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import cors from 'cors';
-import router from './router/router.js';
-import { connectToDatabase } from './config/connectToDatabase.js';
-import './config/passport.js';
+import './src/config/passport.js';
+import router from './src/router/router.js';
+import { connectToDatabase } from './src/config/connectToDatabase.js';
 dotenv.config();
 
 const app = express();

@@ -18,7 +18,6 @@ export const isValidEmail = async (req, res) => {
 
 export const checkPassword = async (req, res) => {
       const { email, password } = req.body
-      console.log(email, password);
 
       try {
             if (!email || !password) return res.send({ message: "Bad request", status: 400 })

@@ -15,11 +15,11 @@ export default function NavBar() {
       ]
 
       return (
-            <aside className='border-r-1 border-[rgba(180,180,180,0.5)] h-screen py-5 pr-10'>
+            <aside className='border-r-1 border-[rgb(47,51,54)] h-[100dvh] py-3 pr-10 sticky top-0'>
                   <Link to={"/home"}>
-                        <Logo className="w-12! h-12!" />
+                        <Logo className="w-7! h-7! ml-3" />
                   </Link>
-                  <ul className="mt-10 h-[60vh]">
+                  <ul className="h-[60vh]">
                         {menuLink.map((item, id) => (
                               <NavLink key={id} to={item.link} className={({ isActive }) => isActive ? "font-black text-white" : "font-medium text-[#e7e9ea]"}>
                                     <li
