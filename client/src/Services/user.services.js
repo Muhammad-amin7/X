@@ -1,6 +1,6 @@
 class userServices {
       constructor() {
-            this.baseUrl = "http://localhost:3000"
+            this.baseUrl = import.meta.env.VITE_BACKEND_URL
       }
 
       async request(url, method, body) {
