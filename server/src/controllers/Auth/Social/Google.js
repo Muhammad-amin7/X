@@ -1,15 +1,20 @@
-
-import users from "../../../schema/users.js";
-import { createToken } from "../../../utils/createJsonWebTokken.js";
-
 export const authGoogle = async (req, res) => {
-      const email = req.user?.emails?.[0]?.value;
-
       try {
+            console.log("✅ Google auth callback ishlayapti");
+            const email = req.user?.emails?.[0]?.value;
+            console.log("🔍 Foydalanuvchi email:", email);
+
+            if (!email) {
+                  console.error("❌ Email topilmadi");
+                  return res.redirect(`https://x-coral-five.vercel.app/?error=EmailNotFound`);
+            }
+
             const isExisting = await users.findOne({ email: email, provide: "google" });
+            console.log("🔎 Foydalanuvchi bazada mavjudligi:", isExisting ? "Ha" : "Yo‘q");
 
             if (isExisting) {
                   const token = createToken({ id: isExisting._id });
+                  console.log("🔑 Token yaratildi:", token);
                   return res.redirect(`https://x-coral-five.vercel.app/token?token=${token}`);
             } else {
                   const newuser = new users({
@@ -21,12 +26,14 @@ export const authGoogle = async (req, res) => {
                   });
 
                   await newuser.save();
+                  console.log("🆕 Yangi foydalanuvchi yaratildi:", newuser);
 
                   const token = createToken({ id: newuser._id });
+                  console.log("🔑 Yangi token yaratildi:", token);
                   return res.redirect(`https://x-coral-five.vercel.app/token?token=${token}`);
             }
       } catch (error) {
-            console.error("❌Error! Google Auth error:", error);
-            return res.redirect(`https://x-coral-five.vercel.app/`);
+            console.error("❌ Error! Google Auth callbackda xatolik:", error);
+            return res.redirect(`https://x-coral-five.vercel.app/?error=AuthError`);
       }
 };

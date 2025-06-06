@@ -22,11 +22,25 @@ const upload = multer({ storage });
 const router = Router();
 
 // enter with google
-router.get('/user/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
+router.get('/user/auth/google', (req, res, next) => {
+      console.log('➡️ Google auth boshlanmoqda');
+      next();
+}, passport.authenticate('google', { scope: ['email', 'profile'] }));
+
+
 router.get('/user/auth/google/callback',
+      (req, res, next) => {
+            console.log('⬅️ Google auth callback keldi');
+            next();
+      },
       passport.authenticate('google', { failureRedirect: '/', session: false }),
+      (req, res, next) => {
+            console.log('✅ Google auth muvaffaqiyatli, authGoogle funksiyasi chaqirilmoqda');
+            next();
+      },
       authGoogle
 );
+
 
 // enter with github
 router.get('/user/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
