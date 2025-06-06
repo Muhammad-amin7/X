@@ -1,8 +1,9 @@
+
 import users from "../../../schema/users.js";
 import { createToken } from "../../../utils/createJsonWebTokken.js";
 
 export const authGoogle = async (req, res) => {
-      const email = req.user?.emails?.[1]?.value || req.user?.emails?.[0]?.value;
+      const email = req.user?.emails?.[0]?.value;
 
       try {
             const isExisting = await users.findOne({ email: email, provide: "google" });
@@ -10,8 +11,7 @@ export const authGoogle = async (req, res) => {
             if (isExisting) {
                   const token = createToken({ id: isExisting._id });
                   return res.redirect(`https://x-coral-five.vercel.app/token?token=${token}`);
-            }
-            else {
+            } else {
                   const newuser = new users({
                         name: req.user.displayName,
                         email: email,
@@ -19,10 +19,11 @@ export const authGoogle = async (req, res) => {
                         joined_time: new Date(),
                         provide: "google"
                   });
-                  const token = createToken({ id: newuser._id });
 
                   await newuser.save();
-                  return res.redirect(`/?token=${token}`);
+
+                  const token = createToken({ id: newuser._id });
+                  return res.redirect(`https://x-coral-five.vercel.app/token?token=${token}`);
             }
       } catch (error) {
             console.error("❌Error! Google Auth error:", error);
