@@ -9,7 +9,7 @@ export const authGoogle = async (req, res) => {
 
             if (isExisting) {
                   const token = createToken({ id: isExisting._id });
-                  return res.redirect(`${process.env.FRONTEND_URL}/token?token=${token}`);
+                  return res.redirect(`https://x-coral-five.vercel.app/token?token=${token}`);
             }
             else {
                   const newuser = new users({
@@ -22,10 +22,10 @@ export const authGoogle = async (req, res) => {
                   const token = createToken({ id: newuser._id });
 
                   await newuser.save();
-                  return res.redirect(`${process.env.FRONTEND_URL}/?token=${token}`);
+                  return res.redirect(`/?token=${token}`);
             }
       } catch (error) {
             console.error("❌Error! Google Auth error:", error);
-            return res.redirect(`${process.env.FRONTEND_URL}/`);
+            return res.redirect(`https://x-coral-five.vercel.app/`);
       }
 };
