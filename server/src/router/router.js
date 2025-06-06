@@ -23,21 +23,12 @@ const router = Router();
 
 // enter with google
 router.get('/user/auth/google', (req, res, next) => {
-      console.log('➡️ Google auth boshlanmoqda');
       next();
 }, passport.authenticate('google', { scope: ['email', 'profile'] }));
 
 
 router.get('/user/auth/google/callback',
-      (req, res, next) => {
-            console.log('⬅️ Google auth callback keldi');
-            next();
-      },
       passport.authenticate('google', { failureRedirect: '/', session: false }),
-      (req, res, next) => {
-            console.log('✅ Google auth muvaffaqiyatli, authGoogle funksiyasi chaqirilmoqda');
-            next();
-      },
       authGoogle
 );
 

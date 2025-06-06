@@ -8,7 +8,7 @@ dotenv.config()
 passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/user/auth/google/callback',
+      callbackURL: 'https://x-rnmn.onrender.com/user/auth/google/callback',
 }, async (accessToken, refreshToken, profile, done) => {
       try {
             done(null, profile);
@@ -20,7 +20,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GitHubStrategy({
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/user/auth/github/callback',
+      callbackURL: 'https://x-rnmn.onrender.com/user/auth/github/callback',
 }, async (accessToken, refreshToken, profile, done) => {
       try {
             done(null, profile);
