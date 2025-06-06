@@ -10,10 +10,10 @@ export default function Auth() {
       const { openThisModal, setOpenThisModal } = useContext(Context)
 
       const handleLoginGoogle = async () => {
-            window.location.href = 'https://x-rnmn.onrender.com/user/auth/google';
+            window.location.href = `${import.meta.env.VITE_BACKEND_URL}/user/auth/google`;
       };
       const handleLoginGithub = async () => {
-            window.location.href = 'https://x-rnmn.onrender.com/user/auth/github';
+            window.location.href = `${import.meta.env.VITE_BACKEND_URL}/user/auth/github`;
       };
 
 

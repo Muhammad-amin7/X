@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "https://x-rnmn.onrender.com";
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const apiRequest = async ({ method = "get", url, data = null, contentType = "application/json" }) => {
       try {
