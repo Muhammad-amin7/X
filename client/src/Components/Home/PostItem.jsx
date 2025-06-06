@@ -50,7 +50,7 @@ export default function PostItem({ data }) {
 
                   <div className="w-full">
                         <div className="flex items-center gap-1 sm:gap-2">
-                              <div className='min-w-8 sm:min-w-12'>
+                              <div className='min-w-8 sm:min-w-12 sm:hidden'>
                                     <img src={photo} alt="" className='w-7 h-7 sm:w-10 sm:h-10 rounded-full' />
                               </div>
                               <div className="w-full">

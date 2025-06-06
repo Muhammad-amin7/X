@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://x-rnmn.onrender.com";
 
 export const apiRequest = async ({ method = "get", url, data = null, contentType = "application/json" }) => {
       try {
