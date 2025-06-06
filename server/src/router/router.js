@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { checkPassword, isValidEmail } from '../controllers/Auth/Login/Login.js';
+import { checkPassword, isValidEmail } from '../controllers/Auth/Login/login.js'
 import { checkCode, sendCode, setPassword } from '../controllers/Auth/Login/Reset Password.js';
 import { initialData, saveUser, verifyEmail } from '../controllers/Auth/Register/register.js';
 import { authGoogle } from '../controllers/Auth/Social/Google.js';
