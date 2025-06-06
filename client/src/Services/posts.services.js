@@ -45,8 +45,8 @@ class postsServices {
             return this.request(`${this.baseUrl}/posts`, "POST", body)
       }
 
-      async getPosts() {
-            return this.request(`${this.baseUrl}/posts/all/5`, "GET")
+      async getPosts(limit) {
+            return this.request(`${this.baseUrl}/posts/${Number(limit)}`, "GET")
       }
 
       async like(postId) {
@@ -59,6 +59,18 @@ class postsServices {
 
       async getComment(info) {
             return this.request(`${this.baseUrl}/posts/comment/${info?.id}${info?.limit && `/${info.limit}`}`, "GET", null, true)
+      }
+
+      async deletePost(id) {
+            return this.request(`${this.baseUrl}/posts/${id}`, "DELETE", null, true)
+      }
+
+      async bookmarks() {
+            return this.request(`${this.baseUrl}/bookmarks`, "GET")
+      }
+
+      async addBookmark(postId) {
+            return this.request(`${this.baseUrl}/bookmarks/${postId}`, "PUT")
       }
 }
 

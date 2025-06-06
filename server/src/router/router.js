@@ -13,6 +13,9 @@ import { PostsForYou } from '../controllers/Posts/PostsForYou.js';
 import { AddLike } from '../controllers/Posts/Like.js';
 import { addComment } from '../controllers/Posts/addComment.js';
 import { allComments } from '../controllers/Posts/allComments.js';
+import { deletePost } from '../controllers/Posts/deletePost.js';
+import { addBookmark } from '../controllers/Posts/addBookmark.js';
+import { bookmarks } from '../controllers/Get informations/Bookmarks.js';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -42,20 +45,27 @@ router.post('/user/auth/check/email', isValidEmail)
 router.post('/user/auth/login', isValidEmail)
 router.post('/user/auth/login/password', checkPassword)
 
-// resert password 
+// reset password
 router.get('/user/reset/:email', sendCode)
 router.post('/user/reset/check', checkCode)
 router.post('/user/reset/password', setPassword)
 
 // get profile
-router.get('/profile/show/:id', authuser, Profile)
+router.get('/user/:id', authuser, Profile)
 
 // post 
 router.post('/posts', upload.single("image"), authuser, createPost)
-router.get('/posts/all/:limit', authuser, PostsForYou)
+router.delete('/post/:id', authuser, deletePost)
+router.get('/posts/:limit', authuser, PostsForYou)
 router.get('/posts/like/:id', authuser, AddLike)
+
+// comments
 router.post('/posts/comment', authuser, addComment)
 router.get('/posts/comment/:id/:limit', authuser, allComments)
+
+// bookmarks
+router.get('/bookmarks', authuser, bookmarks)
+router.put('/bookmarks/:id', authuser, addBookmark)
 
 
 export default router;

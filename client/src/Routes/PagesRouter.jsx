@@ -6,6 +6,7 @@ import Home from '../Pages/Home'
 import ProtectedRoutes from './ProtectedRoutes'
 import NavBar from '../layouts/NavBar'
 import Profile from '../Pages/Profile'
+import Bookmarks from '../Pages/Bookmarks'
 
 export default function PagesRouter() {
 
@@ -17,6 +18,7 @@ export default function PagesRouter() {
                         <Route element={<ProtectedRoutes />}>
                               <Route path='/home' element={<Home />} />
                               <Route path='/profile' element={<Profile />} />
+                              <Route path='/bookmarks' element={<Bookmarks />} />
                         </Route>
                   </Routes>
             </>

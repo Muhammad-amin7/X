@@ -4,12 +4,12 @@ import NavBar from '../layouts/NavBar'
 export default function ProtectedRoutes() {
       const isLogined = localStorage.getItem("token")
       return isLogined ? (
-            <div className="grid grid-cols-[270px_600px_400px] justify-center">
-                  <div className="block">
+            <div className="sm:grid grid-cols-[9fr_20fr_13fr] max-w-full sm:max-w-4/5 m-auto justify-center">
+                  <div className="hidden sm:block">
                         <NavBar></NavBar>
                   </div>
                   <Outlet />
-                  <div className="block">
+                  <div className="hidden sm:block">
                         <div className='h-[100dvh] border-x-1 border-[rgb(47,51,54)] sticky top-0'></div>
                   </div>
             </div>

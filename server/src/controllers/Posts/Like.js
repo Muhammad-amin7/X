@@ -23,6 +23,7 @@ export const AddLike = async (req, res) => {
                   ok: true,
                   liked: !hasLiked,
                   likes: updatedPost.likes.length,
+                  postId: updatedPost._id,
             });
 
       } catch (error) {

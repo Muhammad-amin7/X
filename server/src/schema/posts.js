@@ -7,7 +7,7 @@ const commentSchema = new mongoose.Schema({
 })
 
 const POSTS = new mongoose.Schema({
-      owner: { type: String, required: true },
+      owner: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
       message: { type: String, required: true },
       image: { type: String },
       created_at: { type: Date, default: Date.now },

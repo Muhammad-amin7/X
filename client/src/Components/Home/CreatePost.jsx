@@ -1,65 +1,52 @@
 import { BiImageAdd } from "react-icons/bi";
-import { Context } from "../../Context/Context";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../layouts/Button";
-import { useCreatePost } from "../../Hooks/useCreatePost";
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost } from "../../Services/post/post.services";
 
 export default function CreatePost() {
-      const { UserInfos } = useContext(Context)
-      const { sendData, loading } = useCreatePost()
-      const [message, setMessage] = useState("")
-      const [image, setImage] = useState("")
-      const [imageUrl, setImageUrl] = useState("")
-      const [ButtonDisabled, setButtonDisabled] = useState(true)
+      const { owner } = useSelector((state) => state.user)
+      const { createPostLoading } = useSelector((state) => state.posts)
+      const [helperState, setHelperState] = useState({ message: "", image: null, imageUrl: null, btnDisabled: true })
+      const dispatch = useDispatch()
 
       useEffect(() => {
-            setButtonDisabled(!message.trim().length > 0)
-      }, [message, image, setMessage])
+            setHelperState((prev) => ({ ...prev, btnDisabled: helperState.message.trim().length === 0 }))
+      }, [helperState.message])
 
-      const handleSubmit = useCallback(() => {
-            if (!message || !message.trim().length) return setMessage("")
+      const handleSubmit = async (e) => {
+            e.preventDefault()
+            if (!helperState.message || helperState.message.trim().length === 0) {
+                  return setHelperState(prev => ({ ...prev, message: "" }));
+            }
+
             const formdata = new FormData()
-            formdata.append("message", message)
-            image && formdata.append("image", image)
-            sendData(formdata)
-            setMessage("")
-            setImage("")
-            setImageUrl("")
-      }, [message, sendData, image])
+            formdata.append("message", helperState.message)
+            helperState.image && formdata.append("image", helperState.image)
+            dispatch(createPost(formdata))
+            setHelperState({ message: "", image: null, imageUrl: null, btnDisabled: true })
+      }
 
-      useEffect(() => {
-            const handleKeyDown = (e) => {
-                  if (e.key === "Enter") {
-                        handleSubmit();
-                  }
-            };
-
-            document.addEventListener('keydown', handleKeyDown);
-
-            return () => {
-                  document.removeEventListener('keydown', handleKeyDown);
-            };
-      }, [handleSubmit]);
 
       const onImageChange = (event) => {
             if (event.target.files && event.target.files[0]) {
-                  setImageUrl(URL.createObjectURL(event.target.files[0]));
-                  setImage(event.target.files[0])
+                  setHelperState(prev => ({ ...prev, imageUrl: URL.createObjectURL(event.target.files[0]) }));
+                  setHelperState(prev => ({ ...prev, image: event.target.files[0] }));
             }
       }
 
       return (
             <div className="w-full p-3 border-b-1 border-[rgb(47,51,54)] text-white flex gap-3">
                   <div className="w-10 h-10 overflow-hidden">
-                        <img src={UserInfos?.photo} alt="" className="w-full aspect-square object-cover rounded-full" />
+                        <img src={owner?.photo} alt="" className="w-full aspect-square object-cover rounded-full" />
                   </div>
 
-                  <div className="w-full">
-                        {image && <img src={imageUrl} className="w-full max-h-100 object-contain" />}
+                  <form className="w-full" onSubmit={handleSubmit}>
+                        {helperState.image && <img src={helperState.imageUrl} className="w-full max-h-100 object-contain" />}
                         <input type="text" className="w-full border-0 outline-0 placeholder:text-lg py-2"
                               placeholder="What's happining ?"
-                              onChange={e => setMessage(e.target.value)}
-                              value={message}
+                              onChange={e => setHelperState(prev => ({ ...prev, message: e.target.value }))}
+                              value={helperState.message}
                         />
                         <div className="flex items-center justify-between w-full border-[rgb(47,51,54)] border-t-1 pt-2 mt-2">
                               <div>
@@ -71,11 +58,11 @@ export default function CreatePost() {
                                     <p className="hidden">Media</p>
                               </div>
 
-                              <Button className={"max-w-25 m-0! py-1!"} onclickEvent={handleSubmit} loading={loading} disabled={ButtonDisabled}>
+                              <Button className={"max-w-25 m-0! py-1!"} onclickEvent={handleSubmit} loading={createPostLoading} disabled={helperState.btnDisabled}>
                                     Post
                               </Button>
                         </div>
-                  </div>
+                  </form>
             </div>
       )
 }

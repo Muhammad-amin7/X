@@ -10,7 +10,10 @@ const USERS = mongoose.Schema({
       provide: { type: String, default: 'email' },
       brithday: { type: Date },
       github_id: { type: String },
-      photo_background: { type: String }
+      photo_background: { type: String },
+      bookmarks: [{
+            post_id: { type: mongoose.Schema.Types.ObjectId, ref: "Post", required: true }
+      }]
 })
 
 export default mongoose.models["users"] || mongoose.model("users", USERS)

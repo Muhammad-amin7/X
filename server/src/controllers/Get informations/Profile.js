@@ -1,8 +1,15 @@
 import users from "../../schema/users.js";
 
 export const Profile = async (req, res) => {
-      const userId = req.params.id && req.params.id !== "undefined" ? req.params.id : req.user?.id
-      const ownerId = req.user?.id;
+      let userId, ownerId;
+      if (req.params.id == "token") {
+            userId = req.user?._id;
+            ownerId = req.user?.id;
+      } else {
+            userId = req.params.id;
+            ownerId = req.user?.id;
+      }
+
 
       try {
 
@@ -10,13 +17,14 @@ export const Profile = async (req, res) => {
                   return res.status(400).send({ status: 400, message: "Bad request" });
             }
 
-            const userinfo = await users.findOne({ _id: userId });
+            const userinfo = await users.findOne({ _id: userId }, { provide: 0, bookmarks: 0, github_id: 0 }).lean();
 
             if (!userinfo) {
                   return res.status(404).send({ status: 404, message: "User not found" });
             }
 
             const isOwner = ownerId && userinfo._id.toString() === ownerId.toString();
+            console.log(userinfo);
 
             return res.send({
                   ok: true,

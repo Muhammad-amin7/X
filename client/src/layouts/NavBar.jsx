@@ -2,7 +2,7 @@ import { FaRegUser } from "react-icons/fa";
 import { FaSearch, FaHome } from "react-icons/fa";
 import Logo from './Logo'
 import { Link, NavLink } from "react-router-dom";
-import { FaBell } from "react-icons/fa6";
+import { FaBell, FaRegBookmark } from "react-icons/fa6";
 import Button from "./Button";
 
 export default function NavBar() {
@@ -12,6 +12,7 @@ export default function NavBar() {
             { title: "Explore", link: "/explore", Icon: FaSearch },
             { title: "Notifications", link: "/notifications", Icon: FaBell },
             { title: "Profile", link: "/profile", Icon: FaRegUser },
+            { title: "Bookmarks", link: "/bookmarks", Icon: FaRegBookmark },
       ]
 
       return (

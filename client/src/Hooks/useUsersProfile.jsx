@@ -11,7 +11,6 @@ export const useUsersProfile = () => {
             setError(null);
             try {
                   const response = await userService.usersProfile(id);
-                  console.log(response);
                   setData(response)
             } catch (err) {
                   setError(err);

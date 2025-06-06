@@ -8,7 +8,7 @@ export const allComments = async (req, res) => {
 
       try {
 
-            const post = await posts.findById(id);
+            const post = await posts.findById({ _id: id });
 
             if (!post) {
                   return res.status(404).send({ ok: false, message: "Post topilmadi" });
@@ -27,7 +27,7 @@ export const allComments = async (req, res) => {
             };
 
             const returns = await Promise.all(post.comments.map(returnFunc));
-            return res.send({ ok: true, data: returns });
+            return res.send({ ok: true, data: returns, postId: post._id });
 
       } catch (error) {
             console.error(error);

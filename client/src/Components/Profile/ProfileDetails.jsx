@@ -1,16 +1,15 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { FaArrowLeft } from 'react-icons/fa6'
 import ProfileNames from './ProfileNames'
 import ProfileImages from './ProfileImages'
 import ProfileEditModal from './ProfileEditModal'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../../Context/Context'
+import { useSelector } from 'react-redux'
 
 export default function ProfileDetails() {
-      const { UserInfos } = useContext(Context)
+      const { owner } = useSelector((state) => state.user)
       const navigate = useNavigate()
-      useEffect(() => { console.log(UserInfos) }, [UserInfos])
-
 
       return (
             <div>
@@ -21,14 +20,14 @@ export default function ProfileDetails() {
                               </button>
 
                               <div>
-                                    <h1 className='text-white text-xl font-semibold block'>{UserInfos?.info?.name}</h1>
+                                    <h1 className='text-white text-xl font-semibold block'>{owner?.name}</h1>
                                     <p className='text-[#71767b] text-sm font-medium'>0 posts</p>
                               </div>
                         </nav>
 
 
-                        <ProfileImages info={UserInfos} />
-                        <ProfileNames info={UserInfos} />
+                        <ProfileImages info={owner} />
+                        <ProfileNames info={owner} />
                   </section>
             </div>
       )
