@@ -7,7 +7,7 @@ import { authGoogle } from '../controllers/Auth/Social/Google.js';
 import { authGithub } from '../controllers/Auth/Social/Github.js';
 import { authuser } from '../middlewares/authUser.mid.js';
 import { Profile } from '../controllers/Get informations/Profile.js';
-import { createPost } from '../controllers/Posts/createPost';
+import { createPost } from '../controllers/Posts/createPost.js';
 import multer from "multer";
 import { PostsForYou } from '../controllers/Posts/PostsForYou.js';
 import { AddLike } from '../controllers/Posts/Like.js';
