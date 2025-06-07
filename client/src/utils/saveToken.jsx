@@ -11,7 +11,7 @@ export default function SaveToken() {
             alert(token)
             if (token) {
                   localStorage.setItem("token", token);
-                  navigate("/home")
+                  navigate("/home") 
             } else {
                   navigate("/")
             }
