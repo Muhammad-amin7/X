@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import HomeNav from '../Components/Home/HomeNav';
 import CreatePost from '../Components/Home/CreatePost';
-import PostItem from '../Components/Home/PostItem';
+import PostItem from '../Components/Home/Post item/PostItem';
 import { Context } from '../Context/Context';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../Services/post/post.services';

@@ -1,6 +1,6 @@
 import { AiOutlineFileExcel } from "react-icons/ai";
 import React, { useEffect } from 'react'
-import PostItem from '../Components/Home/PostItem'
+import PostItem from '../Components/Home/Post item/PostItem'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookmarks } from "../Services/post/post.services";
 

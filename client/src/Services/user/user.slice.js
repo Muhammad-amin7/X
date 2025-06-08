@@ -26,6 +26,7 @@ const userSlice = createSlice({
                         state.owner = action.payload.info;
                   })
                   .addCase(fetchUser.rejected, (state, action) => {
+                        localStorage.removeItem('token');
                         state.loading = false;
                         state.error = action.error?.message || 'Something went wrong';
                   })

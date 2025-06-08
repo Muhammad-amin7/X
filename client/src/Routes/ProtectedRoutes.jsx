@@ -4,7 +4,7 @@ import NavBar from '../layouts/NavBar'
 export default function ProtectedRoutes() {
       const isLogined = localStorage.getItem("token")
       return isLogined ? (
-            <div className="sm:grid grid-cols-[9fr_20fr_13fr] max-w-full sm:max-w-4/5 m-auto justify-center">
+            <div className="sm:grid grid-cols-[9fr_20fr_13fr] max-w-full sm:max-w-[1440px] m-auto justify-center">
                   <div className="hidden sm:block">
                         <NavBar></NavBar>
                   </div>
