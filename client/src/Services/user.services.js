@@ -73,6 +73,8 @@ class userServices {
       async usersProfile(id) {
             return this.request(`${this.baseUrl}/profile/show/${id}`, "GET")
       }
+
+      async 
 }
 
 

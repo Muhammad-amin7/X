@@ -16,6 +16,7 @@ import { allComments } from '../controllers/Posts/allComments.js';
 import { deletePost } from '../controllers/Posts/DeletePost.js';
 import { addBookmark } from '../controllers/Posts/addBookmark.js';
 import { bookmarks } from '../controllers/Get informations/Bookmarks.js';
+import { follow } from '../controllers/Follow/Follow.controller.js';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -72,5 +73,9 @@ router.get('/posts/comment/:id/:limit', authuser, allComments)
 router.get('/bookmarks', authuser, bookmarks)
 router.put('/bookmarks/:id', authuser, addBookmark)
 
+// followers
+router.post('/follow/:id', authuser, follow)
+// router.get('/following', authuser, following)
+// router.get('/followers', authuser, followers)
 
 export default router;

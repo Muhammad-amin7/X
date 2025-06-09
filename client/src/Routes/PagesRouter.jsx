@@ -17,7 +17,7 @@ export default function PagesRouter() {
                         <Route path='/token' element={<SaveToken />} />
                         <Route element={<ProtectedRoutes />}>
                               <Route path='/home' element={<Home />} />
-                              <Route path='/profile' element={<Profile />} />
+                              <Route path='/profile/:id' element={<Profile />} />
                               <Route path='/bookmarks' element={<Bookmarks />} />
                         </Route>
                   </Routes>

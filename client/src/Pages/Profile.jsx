@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaArrowLeft } from 'react-icons/fa6'
 import ProfileDetails from '../Components/Profile/ProfileDetails'
+import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { fetchUser } from '../Services/user/user.services'
 
 export default function Profile() {
+      const { id } = useParams()
+      const dispatch = useDispatch()
+      useEffect(() => {
+            console.log(id)
+            dispatch(fetchUser(id))
+      }, [id])
+
       return (
-            <div className='border-r-1 border-[rgba(180,180,180,0.5)] flex'>
-                  <div className='w-[600px]'>
-                        <ProfileDetails />
-                  </div>
-            </div>
+            <ProfileDetails id={id} />
       )
 }

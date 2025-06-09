@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa6'
 import ProfileNames from './ProfileNames'
 import ProfileImages from './ProfileImages'
@@ -7,10 +7,13 @@ import { useNavigate } from 'react-router-dom'
 import { Context } from '../../Context/Context'
 import { useSelector } from 'react-redux'
 
-export default function ProfileDetails() {
-      const { owner } = useSelector((state) => state.user)
+export default function ProfileDetails({id}) {
+      const { users } = useSelector((state) => state.user)
+      const [user, setUser] = useState(users[id])
       const navigate = useNavigate()
-
+      useEffect(() => {
+            setUser(users[id])
+      }, [users])
       return (
             <div>
                   <section className='min-h-screen border-r-1 border-[rgba(180,180,180,0.5)]'>
@@ -20,14 +23,14 @@ export default function ProfileDetails() {
                               </button>
 
                               <div>
-                                    <h1 className='text-white text-xl font-semibold block'>{owner?.name}</h1>
+                                    <h1 className='text-white text-xl font-semibold block'>{user?.name}</h1>
                                     <p className='text-[#71767b] text-sm font-medium'>0 posts</p>
                               </div>
                         </nav>
 
 
-                        <ProfileImages info={owner} />
-                        <ProfileNames info={owner} />
+                        <ProfileImages info={user} />
+                        <ProfileNames info={user} />
                   </section>
             </div>
       )

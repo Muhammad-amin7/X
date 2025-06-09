@@ -1,12 +1,20 @@
 import { BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Button from "../layouts/Button";
 import Logo from "../layouts/Logo";
 import AuthFormModal from "../Components/Auth/AuthFormModal";
 import { Context } from "../Context/Context";
+import { useNavigate } from 'react-router-dom'
 
 export default function Auth() {
+      const navigate = useNavigate()
+      useEffect(() => {
+            const token = localStorage.getItem('token')
+            navigate(token ? "/home" : "/")
+      }, []);
+
+
       const { openThisModal, setOpenThisModal } = useContext(Context)
 
       const handleLoginGoogle = async () => {

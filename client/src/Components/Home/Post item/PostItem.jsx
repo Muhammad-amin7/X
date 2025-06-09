@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAddBookmark } from "../../../Hooks/useAddBookmark";
 import ItemStatistics from "./ItemStatistics";
+import { useNavigate } from "react-router-dom";
 
 export default function PostItem({ data }) {
       const { name, photo, username } = data.owner
@@ -8,6 +9,7 @@ export default function PostItem({ data }) {
       const { data: bookedData } = useAddBookmark()
       const [statistics, setStatistics] = useState({ likes: 999, comments: 999, shows: 999, liked: false })
       const created_data = new Date(created_at)
+      const navigate =useNavigate()
 
       useEffect(() => {
             if (data.content) {
@@ -39,7 +41,7 @@ export default function PostItem({ data }) {
                                     <img src={photo} alt="" className='w-7 h-7 sm:w-10 sm:h-10 rounded-full' />
                               </div>
                               <div className="w-full lg:flex gap-5">
-                                    <h1 className='text-xs sm:text-[16px] text-white font-bold lg:hover:underline cursor-pointer text-nowrap'>{name}</h1>
+                                    <h1 className='text-xs sm:text-[16px] text-white font-bold lg:hover:underline cursor-pointer text-nowrap' onClick={() => navigate(`/profile/${data.owner.id}`)}>{name}</h1>
                                     <div className="flex sm:gap-4 max-sm:justify-between w-full">
                                           {/* <p className='text-[10px] sm:text-[15px] text-[#71767b]'>{username}@soon</p> */}
                                           <p className='text-[10px] sm:text-[15px] text-[#71767b]'>{created_data.toLocaleDateString("en-En", { month: "long", day: "numeric", year: "numeric" })}</p>

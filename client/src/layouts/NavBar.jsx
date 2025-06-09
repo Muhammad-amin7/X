@@ -14,7 +14,7 @@ export default function NavBar() {
             { title: "Home", link: "/home", Icon: CgHome },
             { title: "Explore", link: "/explore", Icon: BsSearch },
             { title: "Notifications", link: "/notifications", Icon: FaRegBell },
-            { title: "Profile", link: "/profile", Icon: FaRegUser },
+            { title: "Profile", link: `/profile/${owner._id}`, Icon: FaRegUser },
             { title: "Bookmarks", link: "/bookmarks", Icon: FaRegBookmark },
       ]
 

@@ -13,6 +13,12 @@ const USERS = mongoose.Schema({
       photo_background: { type: String },
       bookmarks: [{
             post_id: { type: mongoose.Schema.Types.ObjectId, ref: "Post", required: true }
+      }],
+      followers: [{
+            user_id: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true }
+      }],
+      following: [{
+            user_id: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true }
       }]
 })
 
