@@ -5,6 +5,10 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async ({ limit })
       apiRequest({ url: `/posts/${Number(limit)}` })
 );
 
+export const fetchFollowingsPost = createAsyncThunk("posts/fetchPosts/followings", async ({ limit }) =>
+      apiRequest({ url: `/posts/followings/${Number(10)}` })
+);
+
 export const createPost = createAsyncThunk("posts/createPost", async (body) =>
       apiRequest({
             method: "post",

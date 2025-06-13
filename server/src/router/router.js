@@ -17,6 +17,7 @@ import { deletePost } from '../controllers/Posts/DeletePost.js';
 import { addBookmark } from '../controllers/Posts/addBookmark.js';
 import { bookmarks } from '../controllers/Get informations/Bookmarks.js';
 import { follow } from '../controllers/Follow/Follow.controller.js';
+import { postFollowings } from '../controllers/Posts/postFollowings.js';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -64,6 +65,7 @@ router.post('/posts', upload.single("image"), authuser, createPost)
 router.delete('/post/:id', authuser, deletePost)
 router.get('/posts/:limit', authuser, PostsForYou)
 router.get('/posts/like/:id', authuser, AddLike)
+router.get('/posts/followings/:limit', authuser, postFollowings)
 
 // comments
 router.post('/posts/comment', authuser, addComment)

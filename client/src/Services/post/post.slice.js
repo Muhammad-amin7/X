@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createComment, createPost, deletePost, fetchBookmarks, fetchComments, fetchPosts, likePost } from "./post.services";
+import { createComment, createPost, deletePost, fetchBookmarks, fetchComments, fetchFollowingsPost, fetchPosts, likePost } from "./post.services";
 
 const initialState = {
       // post
       posts: [],
       loading: false,
       createPostLoading: false,
+      // followings post
+      followingsPosts: [],
+      followingsPostsLoading: false,
       // comment
       comments: {},
       commentsLoading: false,
@@ -36,6 +39,20 @@ const postsSlice = createSlice({
                   })
                   .addCase(fetchPosts.rejected, (state, action) => {
                         state.loading = false;
+                        state.error = action.error.message;
+                  })
+
+                  // get followings post
+                  .addCase(fetchFollowingsPost.pending, (state) => {
+                        state.followingsPostsLoading = true;
+                  })
+                  .addCase(fetchFollowingsPost.fulfilled, (state, action) => {
+                        state.followingsPostsLoading = false;
+                        state.followingsPosts = action.payload.posts
+                        console.log(action.payload.posts)
+                  })
+                  .addCase(fetchFollowingsPost.rejected, (state, action) => {
+                        state.followingsPostsLoading = false;
                         state.error = action.error.message;
                   })
 

@@ -18,7 +18,7 @@ export const follow = async (req, res) => {
       try {
             const alreadyFollowing = await users.findOne({
                   _id: currentUser._id,
-                  "following.user_id": targetUserId
+                  "following.user_id": new mongoose.Types.ObjectId(targetUserId)
             });
 
             if (alreadyFollowing) {

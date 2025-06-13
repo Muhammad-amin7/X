@@ -1,24 +1,21 @@
-import { BiTrash } from "react-icons/bi";
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { likePost } from "../../../Services/post/post.services";
 import { useAddBookmark } from "../../../Hooks/useAddBookmark";
-import { FaEye, FaHeart, FaTrash, FaBookmark, FaRegBookmark, FaRegComment } from "react-icons/fa";
+import { FaHeart, FaBookmark, FaRegBookmark, FaRegComment } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import Comment from "../Comment";
-import DeleteModal from "../DeleteModal";
 
 
-export default function ItemStatistics({ statistics, setStatistics, id, creator }) {
+export default function ItemStatistics({ statistics, setStatistics, id }) {
       const dispatch = useDispatch()
       const [toggleComment, setToggleComment] = useState(false)
-      const [deleteModal, setDeleteModal] = useState(false)
       const handleOnLike = () => {
             dispatch(likePost(id))
       }
       const { sendId: sendBookmarkId } = useAddBookmark()
       return (
-            <ul className='flex items-center justify-between mt-6 px-4F'>
+            <ul className='grid grid-cols-[50px_50px_50px] justify-between gap-2 mt-0 px-4 pl-20'>
 
                   {/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=(((   COMMENT   )))=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */}
                   <li className={`${LiStyle} cursor-pointer`} onClick={() => setToggleComment(true)}>
@@ -52,23 +49,9 @@ export default function ItemStatistics({ statistics, setStatistics, id, creator 
                               ? <FaBookmark className="text-white" />
                               : <FaRegBookmark />}
                   </li>
-
-
-
-
-
-                  {/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=(((   DELETE   )))=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */}
-                  {creator
-                        && <li
-                              onClick={() => setDeleteModal(true)}
-                              className={`${LiStyle} cursor-pointer`}>
-                              <BiTrash className="text-[#71767b] lg:hover:text-red-900" />
-                        </li>}
-                  <DeleteModal active={deleteModal} close={setDeleteModal} id={id} />
             </ul>
       )
 }
 
 
 const LiStyle = "flex items-center gap-1 text-[8px] sm:text-[15px]"
-const iconsStyle = "flex items-center justify-center w-8 h-8 rounded-full cursor-pointer"

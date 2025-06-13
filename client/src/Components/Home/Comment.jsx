@@ -53,8 +53,8 @@ export default function Comment({ id, close }) {
       }, [handleKeyDown])
 
       return (
-            <div className="top-0 left-0 flex items-center justify-center fixed bg-[rgba(80,80,80,0.3)] text-white w-screen h-screen z-50" onClick={handleCloseWithBackdrop}>
-                  <div className='bg-black pt-4 rounded-sm overflow-y-auto max-h-[80vh] block w-[95%] max-w-[500px]'>
+            <div className="top-0 left-0 flex items-center justify-center fixed bg-[rgba(255,255,255,0.1)] backdrop-blur-xs text-white w-screen h-screen z-50" onClick={handleCloseWithBackdrop}>
+                  <div className='bg-[rgba(0,0,0,0.2)] backdrop-blur-xl pt-4 rounded-lg overflow-y-auto max-h-[80vh] block w-[95%] max-w-[500px] border-1 border-[#535353]'>
                         {/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=((( When the comment list is empty)))=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */}
                         {!commentsLoading && !comments[id]?.length && (
                               <div className='py-20 text-center'>
@@ -89,7 +89,7 @@ export default function Comment({ id, close }) {
                         {commentsLoading && <div className="w-10 h-10 m-auto my-20 border-2 border-[#777] border-b-0 animate-spin rounded-full"></div>}
 
                         {/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=((( INPUT )))=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */}
-                        <div className="flex items-center sticky left-0 w-full bg-black bottom-0 mt-4">
+                        <div className="flex items-center sticky left-0 w-full bottom-0 mt-4">
                               <input
                                     type="text"
                                     value={inpVal}
